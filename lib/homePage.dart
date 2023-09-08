@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_luas_bangun_datar/pages/calculatorPage.dart';
+import 'package:flutter_luas_bangun_datar/controller/luasController.dart';
 
+import 'package:get/get.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -9,6 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final LuasController controller = Get.put(LuasController());
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -37,38 +40,53 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              const Expanded(
+               Expanded(
                 child: TabBarView(
                   children: <Widget>[
                     Center(
                       child: CalculatorPage(
                           image: "images/Persegi.png",
                           title: "Persegi",
-                          amountTextField: 3),
+                          amountTextField: 2,
+                        contollervalue: controller.hasilLuasSegiEmpat,
+                        indx: 0,
+                      ),
                     ),
                     Center(
                       child: CalculatorPage(
                           image: "images/Trapesium.png",
                           title: "Trapesium",
-                          amountTextField: 4),
+                          amountTextField: 3,
+                        contollervalue: controller.hasilLuasTrapesium,
+                        indx: 1,
+                      ),
                     ),
                     Center(
                       child: CalculatorPage(
                           image: "images/JajarGenjang.png",
                           title: "Jajar Genjang",
-                          amountTextField: 4),
+                          amountTextField: 2,
+                        contollervalue: controller.hasilLuasJajarGenjang,
+                        indx: 2,
+                      ),
                     ),
                     Center(
                       child: CalculatorPage(
                           image: "images/BelahKetupat.png",
                           title: "Belah Ketupat",
-                          amountTextField: 6),
+                          amountTextField: 2,
+                        contollervalue: controller.hasilLuasBelahKetupat,
+                        indx: 3,
+                      ),
                     ),
                     Center(
                       child: CalculatorPage(
                           image: "images/Lingkaran.png",
                           title: "Lingkaran",
-                          amountTextField: 1),
+                          amountTextField: 1,
+                        contollervalue: controller.hasilLuasLingkaran,
+                        indx: 4,
+                      ),
                     ),
                   ],
                 ),

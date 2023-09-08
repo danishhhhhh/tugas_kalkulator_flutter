@@ -1,28 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_luas_bangun_datar/controller/luasController.dart';
 import 'package:flutter_luas_bangun_datar/widget/calculatorButton.dart';
 import 'package:flutter_luas_bangun_datar/widget/calculatorTextField.dart';
 import 'package:get/get.dart';
+import '../widget/indexluas.dart';
 
 class CalculatorPage extends StatefulWidget {
   final String image, title;
   final int amountTextField;
+  final RxDouble? contollervalue;
+  final int indx;
 
-  const CalculatorPage(
-      {super.key,
-      required this.image,
-      required this.title,
-      required this.amountTextField});
+  const CalculatorPage({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.amountTextField,
+    required this.contollervalue,
+    required this.indx,
+  });
 
   @override
   State<CalculatorPage> createState() => _CalculatorPageState();
 }
 
 class _CalculatorPageState extends State<CalculatorPage> {
-  final TextEditingController ctrAlas = TextEditingController();
-  final TextEditingController ctrTinggi = TextEditingController();
   final LuasController controller = Get.put(LuasController());
+  List<TextEditingController> controllers = [];
+
+  var luasIndex = LuasIndex();
+
+  List<Widget> buildEditTextFields() {
+    return controllers.map((controller) {
+      return CalculatorTextField(controller: controller);
+    }).toList();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    controllers = List.generate(
+      widget.amountTextField,
+      (index) => TextEditingController(),
+    );
+  }
+
+  @override
+  void dispose() {
+    controllers.forEach((controller) => controller.dispose());
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +62,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           Obx(
             () => Center(
               child: Text(
-                '${controller.hasilLuasSegiEmpat.value.toString()}',
+                '${widget.contollervalue?.value.toString()}',
                 style: const TextStyle(
                   fontFamily: 'LilitaOne',
                   fontSize: 60,
@@ -44,9 +71,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
               ),
             ),
           ),
-          CalculatorTextField(controller: ctrAlas,),
-          CalculatorTextField(controller: ctrTinggi,),
-          CalculatorButton(controller: controller, controller1: ctrAlas, controller2: ctrTinggi,),
+          ...buildEditTextFields(),
+          CalculatorButton(
+            onPressed: () {
+              luasIndex.Hitung(controllers, widget.indx, controller);
+            },
+          )
         ],
       ),
     );

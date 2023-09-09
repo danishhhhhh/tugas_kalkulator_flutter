@@ -13,7 +13,7 @@ class LuasController extends GetxController {
   }
 
   luasTrapesium(double sisiAtas, double sisiBawah, double tinggi) {
-    hasilLuasTrapesium.value = sisiAtas + sisiBawah * tinggi / 2;
+    hasilLuasTrapesium.value = (sisiAtas + sisiBawah) * tinggi / 2;
   }
 
   luasJajarGenjang(double alas, double tinggi) {

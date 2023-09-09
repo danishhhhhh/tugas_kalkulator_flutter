@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_luas_bangun_datar/controller/luasController.dart';
 
 class CalculatorButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -9,13 +8,23 @@ class CalculatorButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      child: Text(
-        "Hitung",
-        style: TextStyle(
-          fontFamily: 'LilitaOne',
-          color: Color(0xFF383430),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 30),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: Text(
+          "Hitung",
+          style: TextStyle(
+            fontFamily: 'LilitaOne',
+            color: Color(0xFFF5F8FF),
+          ),
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color(0xFF869BDD),
+          shape: const RoundedRectangleBorder(
+            borderRadius:
+            BorderRadius.all(Radius.circular(15)),
+          ),
         ),
       ),
     );

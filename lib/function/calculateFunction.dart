@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_luas_bangun_datar/controller/luasController.dart';
 
 
-class LuasIndex{
-  void Hitung(List<TextEditingController> controllers,int indx,LuasController controller) {
+class CalculateFunction{
+  void Calculate(List<TextEditingController> controllers,int indexBangunDatar,LuasController controller) {
     final values = controllers.map((controller) {
       return double.tryParse(controller.text) ?? 0.0;
     }).toList();
 
-    switch (indx) {
+    switch (indexBangunDatar) {
       case 0:
         _hitungLuasSegiEmpat(values,controller);
         break;
@@ -34,7 +34,7 @@ class LuasIndex{
   }
   void _hitungLuasTrapesium(List<double> values,LuasController controller) {
     if (values.length >= 3) {
-      controller.luasTrapesium(values[0], values[1],values[3]);
+      controller.luasTrapesium(values[0], values[1],values[2]);
     }
   }
 

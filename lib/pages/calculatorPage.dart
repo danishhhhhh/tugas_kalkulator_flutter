@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_luas_bangun_datar/controller/luasController.dart';
 import 'package:flutter_luas_bangun_datar/widget/calculatorButton.dart';
+import 'package:flutter_luas_bangun_datar/widget/calculatorHeader.dart';
 import 'package:flutter_luas_bangun_datar/widget/calculatorTextField.dart';
 import 'package:get/get.dart';
-import '../widget/indexluas.dart';
+import 'package:collection/collection.dart';
+import '../function/calculateFunction.dart';
 
 class CalculatorPage extends StatefulWidget {
   final String image, title;
   final int amountTextField;
-  final RxDouble? contollervalue;
-  final int indx;
+  final RxDouble? controllerHasil;
+  final int indexBangunDatar;
+  final List<String> textHint;
 
   const CalculatorPage({
     super.key,
     required this.image,
     required this.title,
     required this.amountTextField,
-    required this.contollervalue,
-    required this.indx,
+    required this.controllerHasil,
+    required this.indexBangunDatar,
+    required this.textHint,
   });
 
   @override
@@ -26,47 +30,42 @@ class CalculatorPage extends StatefulWidget {
 
 class _CalculatorPageState extends State<CalculatorPage> {
   final LuasController controller = Get.put(LuasController());
-  List<TextEditingController> controllers = [];
-
-  var luasIndex = LuasIndex();
+  List<TextEditingController> textEditingControllers = [];
+  var calculateFuntion = CalculateFunction();
 
   List<Widget> buildEditTextFields() {
-    return controllers.map((controller) {
-      return CalculatorTextField(controller: controller);
+    return textEditingControllers.mapIndexed((index, controller) {
+      String hintText = (index < widget.textHint.length)
+          ? widget.textHint[index]
+          : 'There No Value';
+      return CalculatorTextField(controller: controller, hint: hintText);
     }).toList();
   }
 
   @override
   void initState() {
     super.initState();
-    controllers = List.generate(
+    textEditingControllers = List.generate(
       widget.amountTextField,
       (index) => TextEditingController(),
     );
   }
 
   @override
-  void dispose() {
-    controllers.forEach((controller) => controller.dispose());
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF383430),
+      backgroundColor: Colors.transparent,
       body: Column(
         children: [
-          Image.asset(widget.image),
-          Text(widget.title),
+          CalculatorHeader(image: widget.image, title: widget.title),
           Obx(
             () => Center(
               child: Text(
-                '${widget.contollervalue?.value.toString()}',
+                '${widget.controllerHasil?.value.toString()}',
                 style: const TextStyle(
                   fontFamily: 'LilitaOne',
                   fontSize: 60,
-                  color: Color(0xFFFAFAFA),
+                  color: Color(0xFF1E1E1E),
                 ),
               ),
             ),
@@ -74,7 +73,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           ...buildEditTextFields(),
           CalculatorButton(
             onPressed: () {
-              luasIndex.Hitung(controllers, widget.indx, controller);
+              calculateFuntion.Calculate(textEditingControllers, widget.indexBangunDatar, controller);
             },
           )
         ],

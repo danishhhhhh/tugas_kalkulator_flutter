@@ -13,7 +13,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final LuasController controller = Get.put(LuasController());
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +26,7 @@ class _HomePageState extends State<HomePage> {
                 Column(
                   children: [
                     const CalculatorTabBar(),
-                    CalculatorTabbarView(
-                      controller: controller,
-                    ),
+                    CalculatorTabbarView(),
                   ],
                 ),
               ],
@@ -40,8 +37,9 @@ class _HomePageState extends State<HomePage> {
         floatingActionButton: Container(
           child: ElevatedButton(
               onPressed: () {Get.to(HistoryPage());},
-              child: Icon(Icons.history, size: 35,),
+              child: Icon(Icons.history, size: 35, color: Color(0xFF484F66),),
           style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFFC2CEF4),
             minimumSize: Size.zero,
             padding: EdgeInsets.all(10),
           ),),

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_luas_bangun_datar/controller/luasController.dart';
 import '../pages/calculatorPage.dart';
+import 'package:get/get.dart';
 
 class CalculatorTabbarView extends StatelessWidget {
 
-  CalculatorTabbarView({super.key, required this.controller});
-  LuasController controller;
+  CalculatorTabbarView({super.key});
+  final LuasSegiEmpatController controllerSegiEmpat = Get.put(LuasSegiEmpatController());
+  final LuasTrapesiumController controllerTrapesium = Get.put(LuasTrapesiumController());
+  final LuasJajarGenjangController controllerJajarGenjang = Get.put(LuasJajarGenjangController());
+  final LuasBelahKetupatController controllerBelahKetupat = Get.put(LuasBelahKetupatController());
+  final LuasLingkaranController controllerLingkaran = Get.put(LuasLingkaranController());
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +22,9 @@ class CalculatorTabbarView extends StatelessWidget {
               image: "images/Persegi.png",
               title: "Persegi",
               amountTextField: 2,
-              controllerHasil: controller.hasilLuasSegiEmpat,
               indexBangunDatar: 0,
               textHint: ['Panjang', 'Lebar'],
+              test:  controllerSegiEmpat,
             ),
           ),
           Center(
@@ -27,9 +32,9 @@ class CalculatorTabbarView extends StatelessWidget {
               image: "images/Trapesium.png",
               title: "Trapesium",
               amountTextField: 3,
-              controllerHasil: controller.hasilLuasTrapesium,
               indexBangunDatar: 1,
               textHint: ['Sisi Atas', 'Sisi Bawah', 'Tinggi'],
+              test:  controllerTrapesium,
             ),
           ),
           Center(
@@ -37,9 +42,9 @@ class CalculatorTabbarView extends StatelessWidget {
               image: "images/JajarGenjang.png",
               title: "Jajar Genjang",
               amountTextField: 2,
-              controllerHasil: controller.hasilLuasJajarGenjang,
               indexBangunDatar: 2,
               textHint: ['Alas', 'Tinggi'],
+              test:  controllerJajarGenjang,
             ),
           ),
           Center(
@@ -47,9 +52,9 @@ class CalculatorTabbarView extends StatelessWidget {
               image: "images/BelahKetupat.png",
               title: "Belah Ketupat",
               amountTextField: 2,
-              controllerHasil: controller.hasilLuasBelahKetupat,
               indexBangunDatar: 3,
               textHint: ['Diagonal 1', 'Diagonal 2'],
+              test:  controllerBelahKetupat,
             ),
           ),
           Center(
@@ -57,9 +62,9 @@ class CalculatorTabbarView extends StatelessWidget {
               image: "images/Lingkaran.png",
               title: "Lingkaran",
               amountTextField: 1,
-              controllerHasil: controller.hasilLuasLingkaran,
               indexBangunDatar: 4,
               textHint: ['Radius'],
+              test:  controllerLingkaran,
             ),
           ),
         ],

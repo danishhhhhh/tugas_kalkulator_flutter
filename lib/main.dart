@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_luas_bangun_datar/homePage.dart';
+import 'package:flutter_luas_bangun_datar/pages/homePage.dart';
 import 'package:flutter_luas_bangun_datar/pages/historyPage.dart';
+import 'package:flutter_luas_bangun_datar/pages/splashScreenPage.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         ),
         // Add more routes as needed
       ],
-      home: const HomePage(),
+      home: const SplashScreenPage(),
     );
   }
 }

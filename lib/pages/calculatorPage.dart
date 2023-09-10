@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_luas_bangun_datar/controller/luasController.dart';
+import 'package:flutter_luas_bangun_datar/model/rumusClass.dart';
 import 'package:flutter_luas_bangun_datar/widget/calculatorButton.dart';
 import 'package:flutter_luas_bangun_datar/widget/calculatorHeader.dart';
 import 'package:flutter_luas_bangun_datar/widget/calculatorTextField.dart';
@@ -10,18 +11,18 @@ import '../function/calculateFunction.dart';
 class CalculatorPage extends StatefulWidget {
   final String image, title;
   final int amountTextField;
-  final RxDouble? controllerHasil;
   final int indexBangunDatar;
   final List<String> textHint;
+  final RumusClass test;
 
   const CalculatorPage({
     super.key,
     required this.image,
     required this.title,
     required this.amountTextField,
-    required this.controllerHasil,
     required this.indexBangunDatar,
     required this.textHint,
+    required this.test
   });
 
   @override
@@ -29,9 +30,7 @@ class CalculatorPage extends StatefulWidget {
 }
 
 class _CalculatorPageState extends State<CalculatorPage> {
-  final LuasController controller = Get.put(LuasController());
   List<TextEditingController> textEditingControllers = [];
-  var calculateFuntion = CalculateFunction();
 
   List<Widget> buildEditTextFields() {
     return textEditingControllers.mapIndexed((index, controller) {
@@ -49,7 +48,9 @@ class _CalculatorPageState extends State<CalculatorPage> {
       widget.amountTextField,
       (index) => TextEditingController(),
     );
+    printError(info: "${widget.test}");
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           Obx(
             () => Center(
               child: Text(
-                '${widget.controllerHasil?.value.toString()}',
+                '${widget.test.hasilLuas}',
                 style: const TextStyle(
                   fontFamily: 'LilitaOne',
                   fontSize: 60,
@@ -73,7 +74,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           ...buildEditTextFields(),
           CalculatorButton(
             onPressed: () {
-              calculateFuntion.Calculate(textEditingControllers, widget.indexBangunDatar, controller);
+              CalculateFunction().Calculate(textEditingControllers, widget.indexBangunDatar, widget.test);
             },
           )
         ],

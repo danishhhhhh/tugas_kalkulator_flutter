@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_luas_bangun_datar/controller/luasController.dart';
+import 'package:flutter_luas_bangun_datar/pages/historyPage.dart';
 import 'package:flutter_luas_bangun_datar/widget/calculatorTabBar.dart';
 import 'package:flutter_luas_bangun_datar/widget/calculatorTabbarView.dart';
-
 import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: Container(
           child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {Get.to(HistoryPage());},
               child: Icon(Icons.history, size: 35,),
           style: ElevatedButton.styleFrom(
             minimumSize: Size.zero,

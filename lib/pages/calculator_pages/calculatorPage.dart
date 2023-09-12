@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_luas_bangun_datar/controller/luasController.dart';
-import 'package:flutter_luas_bangun_datar/model/rumusClass.dart';
-import 'package:flutter_luas_bangun_datar/widget/calculatorButton.dart';
-import 'package:flutter_luas_bangun_datar/widget/calculatorHeader.dart';
-import 'package:flutter_luas_bangun_datar/widget/calculatorTextField.dart';
+import 'package:flutter_luas_bangun_datar/pages/history_pages/function/historyFuntion.dart';
+import 'package:flutter_luas_bangun_datar/pages/calculator_pages/model/rumusClass.dart';
+import 'package:flutter_luas_bangun_datar/pages/calculator_pages/widget/calculatorButton.dart';
+import 'package:flutter_luas_bangun_datar/pages/calculator_pages/widget/calculatorHeader.dart';
+import 'package:flutter_luas_bangun_datar/reuse/calculatorTextField.dart';
 import 'package:get/get.dart';
 import 'package:collection/collection.dart';
-import '../function/calculateFunction.dart';
+import 'function/calculateFunction.dart';
 
 class CalculatorPage extends StatefulWidget {
   final String image, title;
   final int amountTextField;
-  final int indexBangunDatar;
   final List<String> textHint;
-  final RumusClass test;
+  final RumusClass rumusController;
 
   const CalculatorPage({
     super.key,
     required this.image,
     required this.title,
     required this.amountTextField,
-    required this.indexBangunDatar,
     required this.textHint,
-    required this.test
+    required this.rumusController,
   });
 
   @override
@@ -32,15 +30,6 @@ class CalculatorPage extends StatefulWidget {
 class _CalculatorPageState extends State<CalculatorPage> {
   List<TextEditingController> textEditingControllers = [];
 
-  List<Widget> buildEditTextFields() {
-    return textEditingControllers.mapIndexed((index, controller) {
-      String hintText = (index < widget.textHint.length)
-          ? widget.textHint[index]
-          : 'There No Value';
-      return CalculatorTextField(controller: controller, hint: hintText);
-    }).toList();
-  }
-
   @override
   void initState() {
     super.initState();
@@ -48,9 +37,17 @@ class _CalculatorPageState extends State<CalculatorPage> {
       widget.amountTextField,
       (index) => TextEditingController(),
     );
-    printError(info: "${widget.test}");
+    printError(info: "${widget.rumusController}");
   }
 
+  List<CalculatorTextField> buildEditTextFields() {
+    return textEditingControllers.mapIndexed((index, controller) {
+      String hintText = (index < widget.textHint.length)
+          ? widget.textHint[index]
+          : 'There No Value';
+      return CalculatorTextField(controller: controller, hint: hintText);
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +59,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           Obx(
             () => Center(
               child: Text(
-                '${widget.test.hasilLuas}',
+                '${widget.rumusController.hasilLuas.value}',
                 style: const TextStyle(
                   fontFamily: 'LilitaOne',
                   fontSize: 60,
@@ -74,7 +71,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
           ...buildEditTextFields(),
           CalculatorButton(
             onPressed: () {
-              CalculateFunction().Calculate(textEditingControllers, widget.indexBangunDatar, widget.test);
+              CalculateFunction().Calculate(textEditingControllers, widget.rumusController);
+              HistoryFunction().addToHistory(widget.image, widget.title, double.parse("${widget.rumusController.hasilLuas.value}"));
             },
           )
         ],

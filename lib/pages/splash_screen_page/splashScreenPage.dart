@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_luas_bangun_datar/pages/homePage.dart';
+import 'package:flutter_luas_bangun_datar/pages/calculator_pages/homePage.dart';
 import 'package:get/get.dart';
 
 class SplashScreenPage extends StatelessWidget {

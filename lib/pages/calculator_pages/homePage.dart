@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_luas_bangun_datar/controller/luasController.dart';
-import 'package:flutter_luas_bangun_datar/pages/historyPage.dart';
-import 'package:flutter_luas_bangun_datar/widget/calculatorTabBar.dart';
-import 'package:flutter_luas_bangun_datar/widget/calculatorTabbarView.dart';
+import 'package:flutter_luas_bangun_datar/pages/calculator_pages/controller/luasController.dart';
+import 'package:flutter_luas_bangun_datar/pages/history_pages/historyPage.dart';
+import 'package:flutter_luas_bangun_datar/pages/calculator_pages/widget/calculatorTabBar.dart';
+import 'package:flutter_luas_bangun_datar/pages/calculator_pages/widget/calculatorTabbarView.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,14 +21,10 @@ class _HomePageState extends State<HomePage> {
         body: SafeArea(
           child: DefaultTabController(
             length: 5,
-            child: Stack(
+            child: Column(
               children: [
-                Column(
-                  children: [
-                    const CalculatorTabBar(),
-                    CalculatorTabbarView(),
-                  ],
-                ),
+                const CalculatorTabBar(),
+                CalculatorTabbarView(),
               ],
             ),
           ),
@@ -36,7 +32,8 @@ class _HomePageState extends State<HomePage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: Container(
           child: ElevatedButton(
-              onPressed: () {Get.to(HistoryPage());},
+              onPressed: () {
+                Get.to(() => HistoryPage());},
               child: Icon(Icons.history, size: 35, color: Color(0xFF484F66),),
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFFC2CEF4),

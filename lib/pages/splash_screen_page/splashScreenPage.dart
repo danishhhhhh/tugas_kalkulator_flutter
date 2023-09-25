@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_luas_bangun_datar/pages/calculator_pages/homePage.dart';
 import 'package:get/get.dart';
 
 class SplashScreenPage extends StatelessWidget {
@@ -8,7 +7,7 @@ class SplashScreenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: 2), () {
-      Get.to(const HomePage());
+      Get.offNamed('/homePage');
     });
 
     return Scaffold(

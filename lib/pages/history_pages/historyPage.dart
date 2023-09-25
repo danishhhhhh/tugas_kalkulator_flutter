@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_luas_bangun_datar/pages/history_pages/controller/historyController.dart';
 import 'package:flutter_luas_bangun_datar/pages/history_pages/model/historyClass.dart';
-import 'package:flutter_luas_bangun_datar/pages/calculator_pages/homePage.dart';
 import 'package:flutter_luas_bangun_datar/reuse/historyCardList.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +15,7 @@ class HistoryPage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          Get.to(() => HomePage());
+          Get.back();
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFFC2CEF4),

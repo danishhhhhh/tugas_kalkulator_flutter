@@ -13,7 +13,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,14 +31,20 @@ class _HomePageState extends State<HomePage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: Container(
           child: ElevatedButton(
-              onPressed: () {
-                Get.to(() => HistoryPage());},
-              child: Icon(Icons.history, size: 35, color: Color(0xFF484F66),),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFC2CEF4),
-            minimumSize: Size.zero,
-            padding: EdgeInsets.all(10),
-          ),),
+            onPressed: () {
+              Get.toNamed('historyPage');
+            },
+            child: Icon(
+              Icons.history,
+              size: 35,
+              color: Color(0xFF484F66),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFC2CEF4),
+              minimumSize: Size.zero,
+              padding: EdgeInsets.all(10),
+            ),
+          ),
         ));
   }
 }

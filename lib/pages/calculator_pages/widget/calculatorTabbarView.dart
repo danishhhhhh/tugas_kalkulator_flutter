@@ -6,11 +6,11 @@ import 'package:get/get.dart';
 class CalculatorTabbarView extends StatelessWidget {
 
   CalculatorTabbarView({super.key});
-  final LuasSegiEmpatController controllerSegiEmpat = Get.put(LuasSegiEmpatController());
-  final LuasTrapesiumController controllerTrapesium = Get.put(LuasTrapesiumController());
-  final LuasJajarGenjangController controllerJajarGenjang = Get.put(LuasJajarGenjangController());
-  final LuasBelahKetupatController controllerBelahKetupat = Get.put(LuasBelahKetupatController());
-  final LuasLingkaranController controllerLingkaran = Get.put(LuasLingkaranController());
+  final LuasSegiEmpatController controllerSegiEmpat = Get.find();
+  final LuasTrapesiumController controllerTrapesium = Get.find();
+  final LuasJajarGenjangController controllerJajarGenjang = Get.find();
+  final LuasBelahKetupatController controllerBelahKetupat = Get.find();
+  final LuasLingkaranController controllerLingkaran = Get.find();
 
   @override
   Widget build(BuildContext context) {
